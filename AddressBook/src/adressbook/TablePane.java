@@ -43,12 +43,12 @@ public class TablePane extends ScrollPane implements AddressSettings
 	{
 	    this.data.clear();	
 		try {
-			File f = new File(path);
-			Scanner in = new Scanner(f);
-			while(in.hasNextLine()) 
-				addContactToData(data, new Contact(in.nextLine()));
+			File file = new File(path);
+			Scanner input = new Scanner(file);
+			while(input.hasNextLine()) 
+				addContactToData(data, new Contact(input.nextLine()));
 	
-			in.close();
+			input.close();
 		}
 		catch(Exception e) {
 		}
@@ -58,15 +58,12 @@ public class TablePane extends ScrollPane implements AddressSettings
 
 	public void setItemsToFile(String path) throws IOException
 	{
-		File mFile = new File(path);
-		if(mFile.exists()) mFile.delete();
-	    // recreate the target file
-		if (!mFile.exists()) mFile.createNewFile();
+		File file = new File(path);
+		if(file.exists()) file.delete();
+		if (!file.exists()) file.createNewFile();
 
-		// Create objects to read from sourceFile and write to targetFile
-		PrintWriter output = new PrintWriter(mFile);
+		PrintWriter output = new PrintWriter(file);
 
-		// replace text and write result to targetFile
 	      Iterator<Contact> i = data.iterator();
 	      while (i.hasNext()) {
 	         output.println(i.next().toString());
